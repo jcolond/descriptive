@@ -1,0 +1,15 @@
+*Windows
+qui if c(os)=="Windows" cd "C:\Users\Jay Colond\Box\2022-2023\Proposal research\"
+*Linux
+qui if c(os)=="Unix" cd "/home/jay/UCMerced/MA prep/analysis"
+use ipums.dta, clear
+set linesize 200
+set varabbrev off 
+*lower case
+keep race race1 sex education earnings filipinx filipinx1 filipinx2 year age occscore occ1950 erscor50 adultage sample hhwt cluster
+
+xtset sample
+xtreg earnings ib1.race1 ib1.sex ib4.education
+xtset, clear
+
+reg earnings ib1.race1 ib1.sex ib4.education, cluster(sample)
